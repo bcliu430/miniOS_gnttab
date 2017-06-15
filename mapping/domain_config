@@ -1,0 +1,10 @@
+# Kernel image file.
+kernel = "mapping.gz"
+
+# Initial memory allocation (in megabytes) for the new domain.
+memory = 32
+
+# A name for your domain. All domains must have different names.
+name = "mapping-OS"
+
+on_crash = 'destroy'
