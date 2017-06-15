@@ -1,0 +1,10 @@
+# Kernel image file.
+kernel = "offer_kernel.gz"
+
+# Initial memory allocation (in megabytes) for the new domain.
+memory = 32
+
+# A name for your domain. All domains must have different names.
+name = "offer"
+
+on_crash = 'destroy'
