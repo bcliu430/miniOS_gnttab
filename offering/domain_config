@@ -1,5 +1,5 @@
 # Kernel image file.
-kernel = "offer_kernel.gz"
+kernel = "offering.gz"
 
 # Initial memory allocation (in megabytes) for the new domain.
 memory = 32

@@ -16,7 +16,10 @@ void offer_page(void);
 int main(void) {
         sleep(1);
         printf("Hello, world!\n");
-        offer_page();
+        while(1){
+            offer_page();
+            sleep(1);
+        }
 //        printf(DEBUG "end offer page\n");
         return 0;
 }
@@ -30,16 +33,18 @@ void offer_page()
     
     setup_op.dom = DOMID_SELF;
     setup_op.nr_frames = 1;
-//    setup_op.frame_list = grant_table;
-    set_xen_guest_handle(setup_op.frame_list, grant_table);
+    setup_op.frame_list = grant_table;
+//    set_xen_guest_handle(setup_op.frame_list, grant_table);
 
     HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup_op, 1);
 
     /* Offer the grant */
     grant_table[0].domid = DOMID_FRIEND;
     grant_table[0].frame = *shared_page >> 12;
-    flags = GTF_permit_access | GTF_reading | GTF_writing;
+    flags = GTF_permit_access & GTF_reading & GTF_writing;
     grant_table[0].flags = flags;
-    
+   
+    printf(DEBUG "offer status: %d\n", setup_op.status);
+    printf(DEBUG "frame_list: %lu\n", setup_op.frame_list); 
 //    printf(DEBUG "offered page\n");
 }
